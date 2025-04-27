@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { errorResponse } = require('../utils/response');
 
 const protect = async (req, res, next) => {
   let token;
@@ -18,12 +19,18 @@ const protect = async (req, res, next) => {
       next();
     } catch (error) {
       console.error(error);
-      res.status(401).json({ message: 'Not authorized, token failed' });
+      errorResponse(res, {
+        statusCode: 401,
+        message: 'Not authorized, token failed',
+      });
     }
   }
 
   if (!token) {
-    res.status(401).json({ message: 'Not authorized, no token' });
+    errorResponse(res, {
+      statusCode: 401,
+      message: 'Not authorized, no token',
+    });
   }
 };
 

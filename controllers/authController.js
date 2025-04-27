@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { successResponse, errorResponse } = require('../utils/response');
+const catchAsync = require('../utils/catchAsync');
 
 // Генерация токена
 const generateToken = id =>
@@ -9,51 +11,63 @@ const generateToken = id =>
 
 // @desc    Регистрация нового пользователя
 // @route   POST /api/auth/register
-exports.register = async (req, res) => {
+const register = catchAsync(async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const userExists = await User.findOne({ email });
+  const userExists = await User.findOne({ email });
 
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
+  if (userExists) {
+    return errorResponse(res, {
+      statusCode: 400,
+      message: 'User already exists',
+    });
+  }
 
-    const user = await User.create({ email, password });
+  const user = await User.create({ email, password });
 
-    res.status(201).json({
+  successResponse(res, {
+    statusCode: 201,
+    data: {
       _id: user._id,
       email: user.email,
       token: generateToken(user._id),
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+    },
+    message: 'User registered successfully',
+  });
+});
 
 // @desc    Логин пользователя
 // @route   POST /api/auth/login
-exports.login = async (req, res) => {
+const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
 
-    if (user && (await user.matchPassword(password))) {
-      res.json({
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    successResponse(res, {
+      data: {
         _id: user._id,
         email: user.email,
         token: generateToken(user._id),
-      });
-    } else {
-      res.status(401).json({ message: 'Invalid email or password' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+      },
+    });
+  } else {
+    return errorResponse(res, {
+      statusCode: 401,
+      message: 'Invalid email or password',
+    });
   }
-};
+});
 
 // @desc    Получение данных пользователя по токену
 // @route   GET /api/auth/me
-exports.getMe = async (req, res) => {
-  const user = await User.findById(req.user.id).select('-password');
-  res.status(200).json(user);
+const getMe = catchAsync(async (req, res) => {
+  // const user = await User.findById(req.user.id).select('-password');
+  const user = await User.findById(req.query.user).select('-password');
+  successResponse(res, { data: user });
+});
+
+module.exports = {
+  register,
+  login,
+  getMe,
 };
