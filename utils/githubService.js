@@ -53,8 +53,22 @@ async function deleteFile(path, message) {
   });
 }
 
+async function listFiles(path) {
+  try {
+    const res = await api.get(getContentPath(path));
+    if (!Array.isArray(res.data)) {
+      throw new Error('Expected an array of files');
+    }
+    return res.data.filter(file => file.type === 'file');
+  } catch (err) {
+    console.error('❌ Ошибка listFiles:', err.response?.data || err.message);
+    throw err;
+  }
+}
+
 module.exports = {
   getFile,
   saveFile,
   deleteFile,
+  listFiles,
 };
