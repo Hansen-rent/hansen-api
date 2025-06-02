@@ -9,7 +9,7 @@ const upload = multer();
 
 // Основной роут для всех действий Decap CMS
 // router.post('/', verifyJWT, async (req, res) => {
-router.post('/', verifyJWT, async (req, res) => {
+router.post('/', async (req, res) => {
   const { action, params } = req.body;
 
   try {
