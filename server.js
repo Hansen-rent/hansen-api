@@ -12,6 +12,7 @@ dotenv.config();
 
 const app = express();
 
+// Middlewares
 app.use(
   cors({
     origin: ['http://localhost:5173'],
@@ -19,7 +20,6 @@ app.use(
   }),
 );
 
-// Middleware
 app.use(express.json({ limit: '10kb' }));
 
 const limiter = rateLimit({

@@ -1,7 +1,6 @@
 {
-  "name": "auth-api",
+  "name": "hansen-api",
   "version": "1.0.0",
-  "description": "Простое API для авторизации на Node.js с использованием JWT и MongoDB",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -14,7 +13,7 @@
     "jwt",
     "authentication"
   ],
-  "author": "Твой ник или имя",
+  "author": "Oleksandr Kropivnyi",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^3.0.2",
