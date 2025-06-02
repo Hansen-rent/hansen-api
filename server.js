@@ -4,6 +4,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const decapProxyRoutes = require('./routes/decapProxy');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { errorResponse } = require('./utils/response');
@@ -42,6 +43,7 @@ app.use(limiter);
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/decap-proxy', decapProxyRoutes);
 
 // обработка несуществующих роутов (опционально)
 app.use((req, res) => {
