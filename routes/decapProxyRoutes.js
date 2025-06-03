@@ -22,6 +22,8 @@ router.post('/', verifyJWT, async (req, res) => {
           size: file.size,
           url: `/images/uploads/${file.name}`,
         }));
+        console.log('listing:', listing);
+        console.log('files:', files);
         return res.json({ files });
       }
 
