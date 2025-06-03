@@ -14,6 +14,7 @@ dotenv.config();
 const app = express();
 
 // Middlewares
+app.options('*', cors());
 app.use(
   cors({
     origin: [
