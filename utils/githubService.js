@@ -57,6 +57,7 @@ async function deleteFile(path, message) {
 async function listFiles(path) {
   try {
     const res = await api.get(getContentPath(path));
+    console.log('listFiles response:', res.data);
     if (!Array.isArray(res.data)) {
       throw new Error('Expected an array of files');
     }
