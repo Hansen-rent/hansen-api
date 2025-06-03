@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const OWNER = 'Hansen-rent';
-const REPO = 'hansen-api';
+const REPO = 'hansen-fe';
 const BRANCH = 'main';
 const api = axios.create({
   baseURL: 'https://api.github.com',
