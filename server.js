@@ -14,19 +14,18 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-app.options('*', cors());
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'https://hansen-admin.netlify.app',
-      'https://hansen-fe.netlify.app',
-    ],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  }),
-);
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'https://hansen-admin.netlify.app',
+    'https://hansen-fe.netlify.app',
+  ],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json({ limit: '10kb' }));
 
