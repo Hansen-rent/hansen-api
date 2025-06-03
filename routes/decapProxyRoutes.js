@@ -26,6 +26,7 @@ router.post('/', verifyJWT, async (req, res) => {
       }
 
       case 'entriesByFiles': {
+        console.log('entriesByFiles params.files:', params.files);
         const files = await Promise.all(
           params.files.map(async ({ path }) => {
             const raw = await githubService.getFile(path);

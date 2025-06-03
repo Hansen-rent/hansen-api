@@ -17,6 +17,7 @@ function getContentPath(path) {
 }
 
 async function getFile(path) {
+  console.log('getFile path:', path);
   const res = await api.get(getContentPath(path), { params: { ref: BRANCH } });
   return Buffer.from(res.data.content, 'base64').toString();
 }
