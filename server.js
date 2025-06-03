@@ -22,6 +22,8 @@ app.use(
       'https://hansen-fe.netlify.app',
     ],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   }),
 );
 
