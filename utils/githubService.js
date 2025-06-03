@@ -13,7 +13,7 @@ const api = axios.create({
 });
 
 function getContentPath(path) {
-  return `repos/${OWNER}/${REPO}/content/${path}`;
+  return `repos/${OWNER}/${REPO}/contents/${path}`;
 }
 
 async function getFile(path) {
