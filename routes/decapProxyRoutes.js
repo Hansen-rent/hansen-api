@@ -28,11 +28,10 @@ router.post('/', verifyJWT, async (req, res) => {
       }
 
       case 'entriesByFiles': {
-        console.log('entriesByFiles params.files:', params.files);
         const files = await Promise.all(
           params.files.map(async ({ path }) => {
             const raw = await githubService.getFile(path);
-            return { path, raw }; // можно дополнить: data: JSON.parse(raw)
+            return { path, data: JSON.parse(raw) };
           }),
         );
         return res.json({ entries: files });
