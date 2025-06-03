@@ -13,7 +13,6 @@ dotenv.config();
 
 const app = express();
 
-console.log('🔍 КОРС начинается');
 // Middlewares
 const corsOptions = {
   origin: [
@@ -26,8 +25,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 };
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-console.log('🔍 КОРС заканчивается');
+// app.options('/*', cors(corsOptions));
 
 app.use(express.json({ limit: '10kb' }));
 
@@ -46,10 +44,8 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Routes
-console.log('🔍 Роутинг начинается');
 app.use('/api/auth', authRoutes);
 app.use('/api/decap-proxy', decapProxyRoutes);
-console.log('🔍 Роутинг заканчивается');
 
 // обработка несуществующих роутов (опционально)
 app.use((req, res) => {
