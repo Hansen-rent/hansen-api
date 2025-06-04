@@ -28,8 +28,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // app.options('/*', cors(corsOptions));
 
-// Доверяем заголовку X-Forwarded-For от прокси
-app.set('trust proxy', true);
 app.use(express.json({ limit: '10kb' }));
 
 const limiter = rateLimit({
