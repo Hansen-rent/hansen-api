@@ -26,7 +26,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 };
 app.use(cors(corsOptions));
-// app.options('/*', cors(corsOptions));
+app.options('/*', cors(corsOptions));
 
 app.use(express.json({ limit: '10kb' }));
 
