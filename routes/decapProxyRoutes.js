@@ -24,7 +24,7 @@ router.post('/', verifyJWT, async (req, res) => {
         }));
         console.log('listing:', listing);
         console.log('files:', files);
-        return res.json({ files });
+        return res.json(files);
       }
 
       case 'entriesByFiles': {
