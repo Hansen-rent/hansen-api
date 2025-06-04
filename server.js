@@ -15,12 +15,12 @@ const app = express();
 
 // Middlewares
 const corsOptions = {
-  // origin: [
-  //   'http://localhost:5173',
-  //   'https://hansen-admin.netlify.app',
-  //   'https://hansen-fe.netlify.app',
-  // ],
-  origin: '*',
+  origin: [
+    'http://localhost:5173',
+    'https://hansen-admin.netlify.app',
+    'https://hansen-fe.netlify.app',
+  ],
+  // origin: '*',
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
